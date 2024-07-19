@@ -1,5 +1,6 @@
 package application;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ import entities.UsedProduct;
 
 public class Program {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -22,7 +23,7 @@ public class Program {
 		
 		for (int i=1; i<=n; i++) {
 			System.out.println("Product #" + i + " data: ");
-			System.out.print("Common, used or imported (c/u/i)?");
+			System.out.print("Common, used or imported (c/u/i)? ");
 			sc.nextLine();
 			char type = sc.nextLine().charAt(0);
 			
@@ -36,7 +37,8 @@ public class Program {
 				products.add(product);
 			} else if (type == 'u') {
 				
-				Date date = new Date();
+				System.out.print("Manufacture date (DD/MM/YYYY): ");
+				String date = sc.next();
 				
 				Product product = new UsedProduct(name, price, date);
 				products.add(product);
@@ -46,7 +48,7 @@ public class Program {
 				Product product = new ImportedProduct(name, price, customsFee);
 				products.add(product);
 			} else {
-				System.out.println("This type of product does not exist");
+				System.out.println("This type of product does not exist!");
 				i--;
 			}
 		}
